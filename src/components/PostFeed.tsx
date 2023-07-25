@@ -49,7 +49,7 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subcredditName }) => {
   }, [entry, fetchNextPage]);
 
   const actualPosts = posts?.pages.flatMap((page) => page) ?? initialPosts;
-  return actualPosts.length > 0 ? (
+  return (
     <ul className='flex flex-col col-span-2 space-y-6'>
       {actualPosts.map((p, i) => {
         const votesAmt = p.votes.reduce((acc, cur) => {
@@ -88,10 +88,6 @@ const PostFeed: FC<PostFeedProps> = ({ initialPosts, subcredditName }) => {
         }
       })}
     </ul>
-  ) : (
-    <div className='flex items-center justify-center mt-5'>
-      <Loader className='animate-spin w-100' />
-    </div>
   );
 };
 
