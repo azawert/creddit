@@ -63,34 +63,28 @@ const SearchBar = () => {
         value={inputValue}
       />
       {inputValue.length > 0 ? (
-        !isSearchFetching ? (
-          <CommandList className='absolute bg-white top-full inset-x-0 shadow rounded-b-md '>
-            {searchResults?.length === 0 && isSearchFetched && (
-              <CommandEmpty>No results found</CommandEmpty>
-            )}
-            {(searchResults?.length ?? 0) > 0 ? (
-              <CommandGroup heading='Communities'>
-                {searchResults?.map((sub) => (
-                  <CommandItem
-                    key={sub.id}
-                    onSelect={(e) => {
-                      router.push(`/cr/${e}`);
-                      router.refresh();
-                    }}
-                    value={sub.name}
-                  >
-                    <Users className='mr-2 h-4 w-4' />
-                    <a href={`/cr/${sub.name}`}>cr/{sub.name}</a>
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            ) : null}
-          </CommandList>
-        ) : (
-          <div>
-            <Loader className='animate-spin' />
-          </div>
-        )
+        <CommandList className='absolute bg-white top-full inset-x-0 shadow rounded-b-md '>
+          {searchResults?.length === 0 && isSearchFetched && (
+            <CommandEmpty>No results found</CommandEmpty>
+          )}
+          {(searchResults?.length ?? 0) > 0 ? (
+            <CommandGroup heading='Communities'>
+              {searchResults?.map((sub) => (
+                <CommandItem
+                  key={sub.id}
+                  onSelect={(e) => {
+                    router.push(`/cr/${e}`);
+                    router.refresh();
+                  }}
+                  value={sub.name}
+                >
+                  <Users className='mr-2 h-4 w-4' />
+                  <a href={`/cr/${sub.name}`}>cr/{sub.name}</a>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          ) : null}
+        </CommandList>
       ) : null}
     </Command>
   );
